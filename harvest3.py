@@ -16,8 +16,27 @@ def moveSteps(step):
             hubo.pick_beeper()
         
 
+def turn_around_and_one_step_up(dirn):
+    
 moveSteps(6)
 hubo.turn_left()
 moveSteps(1)
 hubo.turn_left()
 moveSteps(5)
+turn_right()
+moveSteps(1)
+turn_right()
+moveSteps(5)
+hubo.turn_left()
+moveSteps(1)
+hubo.turn_left()
+moveSteps(5)
+turn_right()
+moveSteps(1)
+turn_right()
+moveSteps(5)
+
+hubo.turn_left()
+moveSteps(1)
+hubo.turn_left()
+moveSteps(4)
