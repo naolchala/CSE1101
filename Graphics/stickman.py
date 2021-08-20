@@ -2,7 +2,7 @@ from cs1graphics import *
 import time
 
 world = Canvas(1000, 600)
-THICKNESS = 4
+THICKNESS = 10
 class Stickman:
     def __init__(self, world):
         self.man = Layer()
@@ -12,6 +12,8 @@ class Stickman:
         
     def create_person(self):
         self.upper_body = Layer()
+        self.upper_body.adjustReference(0, 30+35)
+
         self.head = Circle(30)
         self.head.setBorderColor("black")
         self.head.setBorderWidth(THICKNESS)
@@ -27,24 +29,72 @@ class Stickman:
         self.body_line.setBorderWidth(THICKNESS)
 
         self.right_hand = Layer()
+        self.right_hand.adjustReference(0, 30+35)
         self.right_arm = Path(Point(0, 30+35), Point(-45, 30+35+50))
-        self.right_hand.add(self.right_arm)
         self.right_arm.setBorderWidth(THICKNESS)
-        self.left_hand = Layer()
+        self.right_wrist = Path(self.right_arm.getPoints()[1], Point(-45-20, 30+35+50+50))
+        self.right_wrist.setBorderWidth(THICKNESS)
+        self.right_hand.add(self.right_arm)
+        self.right_hand.add(self.right_wrist)
 
+        self.left_hand = Layer()
+        self.left_arm = Path(Point(0, 30+35), Point(45, 30+35+50))
+        self.left_arm.setBorderWidth(THICKNESS)
+        
+        self.left_wrist = Path(self.left_arm.getPoints()[1], Point(45+20, 30+35+50+45))
+        self.left_wrist.setBorderWidth(THICKNESS)
+
+        self.left_hand.add(self.left_arm)
+        self.left_hand.add(self.left_wrist)
         
         self.center_body.add(self.body_line)
         self.center_body.add(self.right_hand)
         self.center_body.add(self.left_hand)
 
+        self.lower_body = Layer()
+        
+
+        self.right_leg = Layer()
+        self.right_upper_leg = Path(self.body_line.getPoints()[1], Point(-35, 30+35+100+100))
+        self.right_upper_leg.setBorderWidth(THICKNESS)
+        self.right_lower_leg = Path(self.right_upper_leg.getPoints()[1], Point(-35-15, 30+35+100+100+ 100))
+        self.right_lower_leg.setBorderWidth(THICKNESS)
+        self.right_leg.add(self.right_upper_leg)
+        self.right_leg.add(self.right_lower_leg)
+        
+        self.left_leg = Layer()
+        self.left_upper_leg = Path(self.body_line.getPoints()[1], Point(35, 30+35+100+100))
+        self.left_upper_leg.setBorderWidth(THICKNESS)
+        self.left_lower_leg = Path(self.left_upper_leg.getPoints()[1], Point(35+15, 30+35+100+100+ 100))
+        self.left_lower_leg.setBorderWidth(THICKNESS)
+        self.left_leg.add(self.left_upper_leg)
+        self.left_leg.add(self.left_lower_leg)
+
+        self.lower_body.add(self.right_leg)
+        self.lower_body.add(self.left_leg)
+
 
         self.man.add(self.upper_body)
         self.man.add(self.center_body)
+        self.man.add(self.lower_body)
+
+    def move(self, pixels):
+        for i in range(pixels):
+            self.man.move(1, 0)
+
+    def say_hi(self):
+        for i in range(45):
+            self.right_hand.rotate(1)
+            time.sleep(0.05)
+
+
+def move(object, pixels, xfactor=0, yfactor=0):
+    for i in range(pixels):
+        object.move(xfactor, yfactor)
+
+def rotate(drawable, degree, factor=1):
+    for i in range(degree):
+        drawable.rotate(factor)
 
 man = Stickman(world)
-
-# for i in range(45):
-#     man.upper_body.rotate(1)
-#     time.sleep(0.1)
-    
-    
+man.say_hi()
