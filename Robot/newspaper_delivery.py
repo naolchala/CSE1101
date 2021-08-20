@@ -4,6 +4,6 @@ load_world("worlds/newspaper.wld")
 hubo = Robot()
 
 def climb():
-    
+    hubo
 
 hubo.move()

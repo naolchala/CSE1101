@@ -17,7 +17,7 @@ def moveSteps(step):
         
 
 def turn_around_and_one_step_up(dirn):
-    
+    pass
 moveSteps(6)
 hubo.turn_left()
 moveSteps(1)
