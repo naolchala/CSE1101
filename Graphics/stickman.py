@@ -3,10 +3,11 @@ import time
 
 world = Canvas(1000, 600)
 THICKNESS = 10
+
 class Stickman:
-    def __init__(self, world):
+    def __init__(self, world, x, y):
         self.man = Layer()
-        self.man.moveTo(100, 100)
+        self.man.moveTo(x, y)
         self.create_person()
         world.add(self.man)
         
@@ -24,20 +25,24 @@ class Stickman:
         self.upper_body.add(self.head)
         self.upper_body.add(self.neck)
 
-        self.center_body  = Layer()
-        self.body_line =  Path(Point(0, 30+35), Point(0, 30+35+100))
+        self.center_body = Layer()
+        self.body_line = Path(self.neck.getPoint(1), Point(0, 30+35+100))
         self.body_line.setBorderWidth(THICKNESS)
 
         self.right_hand = Layer()
         self.right_hand.adjustReference(0, 30+35)
+
         self.right_arm = Path(Point(0, 30+35), Point(-45, 30+35+50))
         self.right_arm.setBorderWidth(THICKNESS)
+
         self.right_wrist = Path(self.right_arm.getPoints()[1], Point(-45-20, 30+35+50+50))
         self.right_wrist.setBorderWidth(THICKNESS)
+
         self.right_hand.add(self.right_arm)
         self.right_hand.add(self.right_wrist)
 
         self.left_hand = Layer()
+        self.left_hand.adjustReference(0, 30+35)
         self.left_arm = Path(Point(0, 30+35), Point(45, 30+35+50))
         self.left_arm.setBorderWidth(THICKNESS)
         
@@ -83,9 +88,24 @@ class Stickman:
             self.man.move(1, 0)
 
     def say_hi(self):
-        for i in range(45):
+        for i in range(65):
             self.right_hand.rotate(1)
-            time.sleep(0.05)
+            self.left_hand.rotate(5)
+            if i < 45:
+                self.right_wrist.rotate(2)
+            time.sleep(0.01)
+        while True:
+            for i in range(35):
+                self.right_hand.rotate(-1)
+                time.sleep(0.01)
+                
+            for i in range(35):
+                self.right_hand.rotate(1)
+                time.sleep(0.01)
+
+    def go(self):
+        pass
+        
 
 
 def move(object, pixels, xfactor=0, yfactor=0):
@@ -96,5 +116,7 @@ def rotate(drawable, degree, factor=1):
     for i in range(degree):
         drawable.rotate(factor)
 
-man = Stickman(world)
+man = Stickman(world, 500, 100)
 man.say_hi()
+
+man2 = Stickman(world, 100, 100)
