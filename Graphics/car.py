@@ -52,6 +52,5 @@ class Car:
         self.car.add(self.center_body)
 
 
-class Tire()
 
 Car(world, 10, 20)

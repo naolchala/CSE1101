@@ -60,6 +60,7 @@ class Stickman:
         
 
         self.right_leg = Layer()
+        self.right_leg.adjustReference(self.body_line.getPoint(1).get()[0], self.body_line.getPoint(1).get()[1])
         self.right_upper_leg = Path(self.body_line.getPoints()[1], Point(-35, 30+35+100+100))
         self.right_upper_leg.setBorderWidth(THICKNESS)
         self.right_lower_leg = Path(self.right_upper_leg.getPoints()[1], Point(-35-15, 30+35+100+100+ 100))
@@ -68,6 +69,8 @@ class Stickman:
         self.right_leg.add(self.right_lower_leg)
         
         self.left_leg = Layer()
+        self.left_leg.adjustReference(self.body_line.getPoint(1).get()[0], self.body_line.getPoint(1).get()[1])
+        self.right_upper_leg = Path(self.body_line.getPoints()[1], Point(-35, 30+35+100+100))
         self.left_upper_leg = Path(self.body_line.getPoints()[1], Point(35, 30+35+100+100))
         self.left_upper_leg.setBorderWidth(THICKNESS)
         self.left_lower_leg = Path(self.left_upper_leg.getPoints()[1], Point(35+15, 30+35+100+100+ 100))
@@ -103,9 +106,39 @@ class Stickman:
                 self.right_hand.rotate(1)
                 time.sleep(0.01)
 
-    def go(self):
-        pass
+    def walk(self):
+        self.left_wrist.rotate(-45)
+
+
+        for i in range(45):
+            self.right_hand.rotate(-2)
+            self.left_hand.rotate(2)
+            
+            self.left_leg.rotate(1)
+            self.right_leg.rotate(-1)
+
+            self.right_lower_leg.rotate(0.5)
+            self.left_lower_leg.rotate(-0.5)
+            time.sleep(0.01)
         
+        
+        for i in range(45):
+            self.right_hand.rotate(2)
+            self.left_hand.rotate(-2)
+            self.left_leg.rotate(-1)
+            self.right_leg.rotate(1)
+
+            self.right_lower_leg.rotate(-0.5)
+            self.left_lower_leg.rotate(0.5)
+            time.sleep(0.01)
+        
+        self.left_wrist.rotate(45)
+        
+
+    def go(self, pixels):
+        for i in range(pixels):
+            self.man.move(20, 0)
+            self.walk()
 
 
 def move(object, pixels, xfactor=0, yfactor=0):
@@ -116,7 +149,5 @@ def rotate(drawable, degree, factor=1):
     for i in range(degree):
         drawable.rotate(factor)
 
-man = Stickman(world, 500, 100)
-man.say_hi()
-
-man2 = Stickman(world, 100, 100)
+man = Stickman(world, 100, 100)
+man.go(400)
