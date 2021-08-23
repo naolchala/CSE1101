@@ -106,31 +106,36 @@ class Stickman:
                 self.right_hand.rotate(1)
                 time.sleep(0.01)
 
-    def walk(self):
+    def walk(self, pixels):
         self.left_wrist.rotate(-45)
+        for j in range(pixels):
+            for i in range(45):
+                if i % 5:
+                    self.man.move(1, 0)
 
+                self.right_hand.rotate(-2)
+                self.left_hand.rotate(2)
+                
+                self.left_leg.rotate(1)
+                self.right_leg.rotate(-1)
 
-        for i in range(45):
-            self.right_hand.rotate(-2)
-            self.left_hand.rotate(2)
+                self.right_lower_leg.rotate(0.5)
+                self.left_lower_leg.rotate(-0.5)
+                time.sleep(0.01)
             
-            self.left_leg.rotate(1)
-            self.right_leg.rotate(-1)
+            self.man.move(1, 0)
+            
+            for i in range(45):
+                if i % 5:
+                    self.man.move(1, 0)
+                self.right_hand.rotate(2)
+                self.left_hand.rotate(-2)
+                self.left_leg.rotate(-1)
+                self.right_leg.rotate(1)
 
-            self.right_lower_leg.rotate(0.5)
-            self.left_lower_leg.rotate(-0.5)
-            time.sleep(0.01)
-        
-        
-        for i in range(45):
-            self.right_hand.rotate(2)
-            self.left_hand.rotate(-2)
-            self.left_leg.rotate(-1)
-            self.right_leg.rotate(1)
-
-            self.right_lower_leg.rotate(-0.5)
-            self.left_lower_leg.rotate(0.5)
-            time.sleep(0.01)
+                self.right_lower_leg.rotate(-0.5)
+                self.left_lower_leg.rotate(0.5)
+                time.sleep(0.01)
         
         self.left_wrist.rotate(45)
         
@@ -150,4 +155,4 @@ def rotate(drawable, degree, factor=1):
         drawable.rotate(factor)
 
 man = Stickman(world, 100, 100)
-man.go(400)
+man.walk(400)
