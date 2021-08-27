@@ -46,8 +46,8 @@ class Soldier:
         self.face.add(self.mouth)
 
         self.middle  = Layer()
-        self.body = ClosedSpline(Point(0, 20), Point(40, 0), Point(60, 20), Point(70, 50), Point(40, 60), Point(10, 50))
-        self.body.setFillColor(self.face_color)
+        self.body = ClosedSpline(Point(0, 20), Point(20, 10), Point(40, 20), Point(50, 60), Point(20, 70), Point(10, 60))
+        self.body.setFillColor(self.color)
 
         self.middle.add(self.body)
         self.legs = Layer()
