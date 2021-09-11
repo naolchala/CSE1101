@@ -46,15 +46,32 @@ class Soldier:
         self.face.add(self.mouth)
 
         self.middle  = Layer()
-        self.body = ClosedSpline(Point(0, 20), Point(20, 10), Point(40, 20), Point(50, 60), Point(20, 70), Point(10, 60))
+        self.body = ClosedSpline(
+            Point(10, 0),
+            Point(30, -10),
+            Point(60, 0),
+            Point(60, 40),
+            Point(35, 45),
+            Point(0, 40)
+        )
         self.body.setFillColor(self.color)
+        self.body.moveTo(-25, 20)
 
         self.middle.add(self.body)
-        self.legs = Layer()
 
-        self.soldier.add(self.face)
-        self.soldier.add(self.middle)
+        self.legs = Layer()
+        self.left_leg =  self.create_leg()
+        self.left_leg.move(-13, 0)
+        self.right_leg = self.create_leg()
+        self.right_leg.move(13, 0)
+
+        self.legs.add(self.left_leg)
+        self.legs.add(self.right_leg)
+        self.legs.moveTo(0, 75)
+
         self.soldier.add(self.legs)
+        self.soldier.add(self.middle)
+        self.soldier.add(self.face)
 
     def create_eye(self):
         eye_container=Layer()
@@ -73,5 +90,28 @@ class Soldier:
         eye_container.add(eye_ball)
         eye_container.add(eye_brow)
         return eye_container
+
+    def create_leg(self):
+        leg = Layer()
+        upper = Rectangle(15, 20)
+        upper.setFillColor(self.color)
+        
+        sl = 20
+        sh = 8
+        shoe = Polygon(
+            Point(0, 0),
+            Point(0, sh),
+            Point(sl, sh),
+            Point(sl, 4),
+            Point(15, 0)
+        )
+
+        shoe.move(-7.5, 10)
+        shoe.setFillColor("brown")
+
+        leg.add(upper)
+        leg.add(shoe)
+        return leg
+
 
 solder1 = Soldier(world, "red", (210, 171, 156), 100, 100)

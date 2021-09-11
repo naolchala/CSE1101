@@ -7,6 +7,7 @@ THICKNESS = 10
 class Stickman:
     def __init__(self, world, x, y):
         self.man = Layer()
+        self.man.scale(.5)
         self.man.moveTo(x, y)
         self.create_person()
         world.add(self.man)
