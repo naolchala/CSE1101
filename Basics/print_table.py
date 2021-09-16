@@ -15,7 +15,7 @@ for i in range(len(countries)):
 
 
 def print_table(table):
-    output = "No.\tCountry\t\tTotal Medal\n"
+    output = "No.{:<10}Country{:10}Total Medal\n".format("")
     for i in range(len(table)):
         output += "{:<10}{:10}\t\t{}\n".format(i+1, table[i][0], table[i][1], )
 
