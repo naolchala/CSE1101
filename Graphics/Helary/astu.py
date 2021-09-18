@@ -868,7 +868,7 @@ astu = Text('Project For ASTU Department of Computing', 20, Point(680, 1425))
 astu.setFontColor("white")
 group.setDepth(-110)
 group.add(astu)
-gr = Text('GROUP31', 16, Point(700, 1165))
+gr = Text('GROUP 41', 16, Point(700, 1165))
 gr.setFontColor("white")
 group.add(gr)
 gr2 = Text('GROUP MEMBERS', 16, Point(700, 1185))
@@ -882,8 +882,8 @@ ASTU.add(group)
 
 students = [
     {
-        "name": "Helary Kasahun",
-        "uid": "UGR/23857/13"
+        "name": "Naol Chala",
+        "uid": "UGR/22527/13"
     },
     {
         "name": "Melat Takele",
